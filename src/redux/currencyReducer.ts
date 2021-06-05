@@ -55,7 +55,9 @@ export const currencyReducer = (state: CurrencyState = initialState, action: Cur
         case ACTIONS_TYPE.CHANGE_CURRENT_CURRENCY:
             return {
                 ...state,
-                currentCurrency: action.currentCurrency
+                currentCurrency: action.currentCurrency,
+                amountOfBYN: '',
+                amountOfCurrency: '',
             }
         default:
             return state;
