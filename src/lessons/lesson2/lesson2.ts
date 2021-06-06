@@ -20,9 +20,50 @@ console.log('lesson 2');
 // https://learn.javascript.ru/recursion
 // https://www.youtube.com/watch?v=Kuq6oIN3PH0
 
+//function(class)
+
+// let globalScope = {
+//     outerScope: null,
+//     a: 10,
+//     f: 'Function',
+// }
+// var a = 10
+// f(50)
+// function f(arg: number) {
+//     let fScope = {
+//         outerScope: globalScope,
+//         arg: 50,
+//         param: undefined,
+//         inner: 'Function'
+//     }
+//     console.log(a)
+//     test()
+// }
+//
+// function test() {
+//     let fScope = {
+//         outerScope: globalScope,
+//
+//     }
+//     console.log(a)
+// }
+//
+//
+//
+// let b = 20
+
 
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
+
+function sum(n: number) {
+   return function (n2: number) {
+       return n + n2
+   }
+}
+
+console.log(sum(3)(6))
+
 
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
@@ -32,6 +73,24 @@ console.log('lesson 2');
 // const counter2 = makeCounter();
 // counter2(); // 1
 // counter(); // 3
+
+function makeCounter() {
+    let count = 0
+    return function () {
+        return ++count
+    }
+}
+const counter = makeCounter()
+const counter2 = makeCounter()
+
+console.log(counter())
+console.log(counter())
+console.log(counter())
+
+console.log(counter2())
+console.log(counter2())
+console.log(counter2())
+
 
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
@@ -59,5 +118,5 @@ console.log('lesson 2');
 // Task 06
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
-// just a plug
+
 export default () => {};
