@@ -56,10 +56,10 @@ console.log('lesson 2');
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
-function sum(n: number) {
-   return function (n2: number) {
-       return n + n2
-   }
+export function sum(n: number) {
+    return function (n2: number) {
+        return n + n2
+    }
 }
 
 console.log(sum(3)(6))
@@ -74,22 +74,22 @@ console.log(sum(3)(6))
 // counter2(); // 1
 // counter(); // 3
 
-function makeCounter() {
-    let count = 0
-    return function () {
-        return ++count
-    }
-}
-const counter = makeCounter()
-const counter2 = makeCounter()
-
-console.log(counter())
-console.log(counter())
-console.log(counter())
-
-console.log(counter2())
-console.log(counter2())
-console.log(counter2())
+// function makeCounter() {
+//     let count = 0
+//     return function () {
+//         return ++count
+//     }
+// }
+// const counter = makeCounter()
+// const counter2 = makeCounter()
+//
+// console.log(counter())
+// console.log(counter())
+// console.log(counter())
+//
+// console.log(counter2())
+// console.log(counter2())
+// console.log(counter2())
 
 
 // Task 03
@@ -99,6 +99,28 @@ console.log(counter2())
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+function makeCounter03(num: number) {
+    let count = num
+    return {
+        increase: () => ++count,
+        decrease: () => --count,
+        reset: () => count = 0,
+        set: (newNum: number) => count = newNum,
+    }
+}
+
+const counter03 = makeCounter03(2)
+
+console.log('function makeCounter03')
+console.log(counter03.increase())
+console.log(counter03.increase())
+console.log(counter03.reset())
+console.log(counter03.increase())
+console.log(counter03.increase())
+console.log(counter03.decrease())
+console.log(counter03.increase())
+console.log(counter03.increase())
+console.log(counter03.set(11))
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -110,6 +132,38 @@ console.log(counter2())
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
 
+function superSum(num: number) {
+    if (num <= 0) return 0
+    if (num === 1) return (n:number) => n
+
+    let _arguments: number[] = []
+
+    function helper(...args: number[]) {
+        _arguments = [..._arguments, ...args]
+        if (_arguments.length >= num) {
+            _arguments.length = num
+            return _arguments.reduce((acc, num) => acc + num)
+        } else {
+            return helper
+        }
+    }
+
+    return helper
+
+}
+console.log('superSum')
+console.log(superSum(0)) //0
+//@ts-ignore
+console.log(superSum(3)(2)(5)(3)) //10
+//@ts-ignore
+console.log(superSum(3)(2)(5,3)) //10
+//@ts-ignore
+console.log(superSum(3)(2,5,3) )//10
+//@ts-ignore
+console.log(superSum(3)(2,5)(3))//10
+//@ts-ignore
+console.log(superSum(3)(2,5)(3,9)) //10
+
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
 // Task 05
@@ -119,4 +173,5 @@ console.log(counter2())
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
 
-export default () => {};
+export default () => {
+};
