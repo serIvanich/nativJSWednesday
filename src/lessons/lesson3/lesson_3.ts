@@ -15,6 +15,17 @@ console.log('lesson 3');
 // https://jsonplaceholder.typicode.com/posts/1
 // https://habr.com/ru/company/oleg-bunin/blog/417461/?_ga=2.54695343.543933152.1602500664-1040035071.1596811661
 
+// let a = 10
+// //...
+// const prom = new Promise((resolve, reject) => {
+//     let b = 10
+//     //some code
+//     //...
+//     //some async request
+//     setTimeout(() => {},0)
+//     resolve('oneArg')//succes response
+//     reject('oneArg')//unsucces response
+// }
 
 // just a plug
 export default ()=>{};
