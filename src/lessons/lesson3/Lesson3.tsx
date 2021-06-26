@@ -4,27 +4,39 @@ import './lesson_3';
 
 const Lesson3 = () => {
     const [searchName, setSearchName] = useState('');
-    const [serachResult, setSerachResult] = useState('');
+    const [serachResult, setSearchResult] = useState('');
     const [searchNameByType, setSearchNameByType] = useState('');
     const [serachResultByType, setSerachResultByType] = useState('');
 
-    // const searchFilm = () => {}
 
-    // const searchFilm = async () => {
-    //     try{
-    //         const {data}  = await API.searchFilmsByTitle(searchName)
-    //         const {Response, Search, Error} = data
-    //         console.log('data', data)
-    //         if (Response === 'True') {
-    //             setSerachResult(JSON.stringify(Search))
-    //
-    //         }else {
-    //             setSerachResult(Error)
-    //         }
-    //     } catch (err){
-    //         console.log('error', err)
-    //     }
-    // };
+    // const searchFilm = () => {
+    //     API.searchFilmsByTitle(searchName)
+    //         .then(response => {
+    //             console.log(response)
+    //             if (response.data.Response === 'True') {
+    //                 setSerachResult(JSON.stringify(response.data.Search))
+    //             }else {
+    //                 setSerachResult(response.data.Error)
+    //             }
+    //         })
+    //         .catch(err => console.log(err))
+    // }
+
+    const searchFilm = async () => {
+        try{
+            const {data}  = await API.searchFilmsByTitle(searchName)
+            const {Response, Search, Error} = data
+            console.log('data', data)
+            if (Response === 'True') {
+                setSearchResult(JSON.stringify(Search))
+
+            }else {
+                setSearchResult(Error)
+            }
+        } catch (err){
+            console.log('error', err)
+        }
+    };
 
     const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {
         const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : '';
@@ -37,7 +49,7 @@ const Lesson3 = () => {
             <div>
                 <h3><p>Search by name:</p></h3>
                 <input type="text" value={searchName} onChange={(e) => setSearchName(e.currentTarget.value)}/>
-                {/*<button onClick={searchFilm}>Search</button>*/}
+                <button onClick={searchFilm}>Search</button>
                 <div>
                     {serachResult}
                 </div>
