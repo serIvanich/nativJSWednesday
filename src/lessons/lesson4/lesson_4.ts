@@ -21,19 +21,26 @@ console.log('lesson 4');
 // и возвращает строку 'Promise Data'
 // Получите данные промиса и выведите их в консоль
 
+Promise.resolve('Promise Data').then(console.log)
+
 
 // Task 03
 // Создайте промис, который после создания сразу же переходит в состояние rejected
 // и возвращает строку 'Promise Error'
 // Получите данные промиса и выведите их в консоль
-
+Promise.reject('Promise Error').catch(console.log)
 
 // Task 04
 // Создайте промис, который переходит в состояние resolved через 3с.
 // (Используйте setTimeout)
 // и возвращает строку 'Promise Data'
 // Получите данные промиса и выведите их в консоль
-
+const promise = new Promise((res) => {
+    setTimeout(() => {
+        res('Promise Data')
+    },3000)
+})
+promise.then(console.log)
 
 // Task 05
 // Создайте литерал объекта handlePromise со следующими свойствами:
@@ -97,12 +104,55 @@ window.prom = handlePromise
 // Создайте функцию print, которая выводит в консоль значение своего параметра
 // Добавьте два метода then и передайте созданные функции.
 
+let pr = new Promise((res) => {
+    setTimeout(() => {
+        res('My name is')
+    },1000)
+})
+const onSuccess = (par: any, name = 'Sergiy') => {
+    return `${par} ${name}`
+}
+const print = (value: string) => {
+    console.log(value)
+}
+//@ts-ignore
+pr.then(
+    onSuccess
+)
+    .then(
+        print
+    )
 
 // Task 7
 // Создайте три промиса. Первый промис возвращает объект { name: "Anna" } через 2с,
 // второй промис возвращает объект {age: 16} через 3 с, а третий {city: ''} через 4с.
 // Получите результаты работы промисов, объедините свойства объектов
 // и выведите в консоль {name, age, city}
+
+let pr1 = new Promise(res => {
+    setTimeout(() => {
+        res({name: 'Anna'})
+    },2000)
+})
+let pr2 = new Promise(res => {
+    setTimeout(() => {
+        res({age: 16})
+    },3000)
+})
+let pr3 = new Promise(res => {
+    setTimeout(() => {
+        res({city: ''})
+    },4000)
+})
+Promise.all([pr1, pr2, pr3]).then(
+    (arr) => {
+        let obj = arr[0]
+        let obj1 = arr[1]
+        let obj2 = arr[2]
+        //@ts-ignore
+        console.log({...obj, ...obj1, ...obj2})
+    }
+)
 
 
 // just a plug

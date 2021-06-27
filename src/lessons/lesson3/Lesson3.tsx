@@ -4,9 +4,9 @@ import './lesson_3';
 
 const Lesson3 = () => {
     const [searchName, setSearchName] = useState('');
-    const [serachResult, setSearchResult] = useState('');
+    const [searchResult, setSearchResult] = useState('');
     const [searchNameByType, setSearchNameByType] = useState('');
-    const [serachResultByType, setSerachResultByType] = useState('');
+    const [searchResultByType, setSearchResultByType] = useState('');
 
 
     // const searchFilm = () => {
@@ -38,9 +38,23 @@ const Lesson3 = () => {
         }
     };
 
-    const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : '';
-        API.searchFilmsByType(searchNameByType, type)
+    const searchByType = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        debugger
+        try {
+            const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : '';
+            const {data}  = await API.searchFilmsByType(searchNameByType, type)
+            const {Response, Search, Error} = data
+
+
+            if (Response === 'True'){
+                setSearchResultByType(JSON.stringify(Search))
+
+            }else {
+                setSearchResultByType(Error)
+            }
+        } catch (err){
+            console.log('error', err)
+        }
     }
 
     return (
@@ -51,7 +65,7 @@ const Lesson3 = () => {
                 <input type="text" value={searchName} onChange={(e) => setSearchName(e.currentTarget.value)}/>
                 <button onClick={searchFilm}>Search</button>
                 <div>
-                    {serachResult}
+                    {searchResult}
                 </div>
             </div>
 
@@ -61,7 +75,7 @@ const Lesson3 = () => {
                 <button onClick={searchByType} data-t='movie'>Movie</button>
                 <button onClick={searchByType} data-t='series'>Series</button>
                 <div>
-                    {serachResultByType}
+                    {searchResultByType}
                 </div>
             </div>
         </div>
