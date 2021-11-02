@@ -20,6 +20,32 @@ console.log('Lesson 7');
 // walk => `${this.name} walking`
 // проверить, что методы работают
 
+// interface AnimalType {
+//     name: string
+// }
+class Animal {
+    // walk: Function
+    // eat: Function
+    // sleep: Function
+
+    constructor(public name: string = 'Animal') {
+        this.name = name
+    }
+    walk = () => {
+        console.log(`${this.name} walking`)
+    }
+    eat = () => {
+        console.log(`${this.name} eating`)
+    }
+    sleep = () => {
+        console.log(`${this.name} sleeping`)
+    }
+}
+const cat = new Animal('Cat')
+cat.eat()
+cat.sleep()
+cat.walk()
+
 
 //Task 02
 // Реализовать класс Monkey на базе класса Animal,  конструктор принимает name(по умолчанию 'Monkey') в качестве
