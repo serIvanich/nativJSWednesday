@@ -41,7 +41,7 @@ function greeting() {
 }
 someObj.greeting = greeting
 
-console.log(someObj.greeting())
+//console.log(someObj.greeting())
 // Task 02
 // реализовать счетчик counter в виде объекта со следующими методами:
 // get current count; - выводит текущее значение счетчика
@@ -104,13 +104,14 @@ console.log(hl.greeting())
 
 let One = {name: 'One'};
 let Two = {
-    name: 'Two', sayHello: function () {
-        console.log(`Hello, my name is ${this.name}lesson5`)
+    name: 'Two',
+    sayHello: function () {
+        console.log(`Hello, my name is ${this.name} lesson5`)
     }
 };
 
 const helloOne = Two.sayHello.bind(One)
-console.log(helloOne())
+helloOne()
 
 // Task 06
 // создайте объект helperObj у которого есть следующие методы:
@@ -128,26 +129,34 @@ type HelperObjType = {
 }
 
 const helperObj: HelperObjType = {
-   // @ts-ignore
-    changeName(name) {
-        // @ts-ignore
+
+    changeName(name: string) {
         this.name = name
     },
     setAge(age: number) {
         this.age = age
     },
     greeting() {
-
+        Two.sayHello.apply(this)
     }
 }
+
+helperObj.changeName('ola')
+helperObj.greeting()
 
 
 // Bind
 // 1) Дана функция sumTwoNumbers, реализовать функцию bindNumber которая принимает функцию sumTwoNumbers и число, и
 // возвращает другую функцию, которое также принимает число и возвращает сумму этих чисел. Замыкание использовать нельзя
-// function sumTwoNumbers(a: number, b: number): number {
-//     return a + b
-// };
+function sumTwoNumbers(a: number, b: number): number {
+    return a + b
+};
+function bindNumber(fn: Function, num1: number) {
+
+    return function (num2: number) {
+        fn(num1, num2)
+    }
+}
 
 // 2) Напишите функцию которая принимает первым аргументом объект One, а вторым helperObj. Данная функция
 // возвращает другую функцию которая принимает строку в качестве аргумента и устанавливает ее свойству name объекта One
