@@ -119,6 +119,29 @@ console.log(helloOne())
 // greeting - используется функция sayHello из Task 05
 // можно использовать @ts-ignore
 
+type HelperObjType = {
+    name?: string
+    age?: number
+    changeName: Function
+    setAge: Function
+    greeting: Function
+}
+
+const helperObj: HelperObjType = {
+   // @ts-ignore
+    changeName(name) {
+        // @ts-ignore
+        this.name = name
+    },
+    setAge(age: number) {
+        this.age = age
+    },
+    greeting() {
+
+    }
+}
+
+
 // Bind
 // 1) Дана функция sumTwoNumbers, реализовать функцию bindNumber которая принимает функцию sumTwoNumbers и число, и
 // возвращает другую функцию, которое также принимает число и возвращает сумму этих чисел. Замыкание использовать нельзя
